@@ -1,34 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"flag"
+	"log"
+	"kubi-assignment/server"
 )
 
-func helloworld() string {
-	return "Hello Kubiya!!!"
-}
-
-func healthcheck() string {
-	return "Health OK!"
-}
-
-func livenesscheck() string {
-	return "I am alive!!!"
-}
-
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, helloworld())
-	})
 
-	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, healthcheck())
-	})
+	port := flag.String("port", "8080", "Port to listen to")
+	flag.Parse()
 
-	http.HandleFunc("/liveness", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, livenesscheck())
-	})
+	listeningPort := ":" + *port
+	log.Println(listeningPort)
 
-	http.ListenAndServe(":8080", nil)
+	httpServer := server.NewHTTPServer(listeningPort)
+
+	if err := httpServer.Open(); err != nil {
+		log.Fatal("could not open httpServer", err)
+	}
+
 }

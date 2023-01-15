@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kubi-assignment
+  name: kubi-assignment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kubi-assignment
+  template:
+    metadata:
+      labels:
+        app: kubi-assignment
+    spec:
+      containers:
+      - name: kubi-assignment
+        image: videmsky/kubi-assignment:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: web
+          containerPort: 8080

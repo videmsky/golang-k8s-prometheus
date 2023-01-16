@@ -14,6 +14,9 @@ running the project:
 * http server listens on `localhost:8080`
 * metrics endpoint available `localhost:8080/metrics`
 
+testing the project:
+* `go test -v -cover ./...`
+
 building the project binary:
 * `go build -o app`
 

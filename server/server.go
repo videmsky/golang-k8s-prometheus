@@ -44,8 +44,12 @@ func (s HTTPServer) Open() error {
 	return nil
 }
 
+func helloworld() string {
+	return "Hello Kubiya!!!"
+}
+
 func home(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Hello Kubiya!!!")
+	io.WriteString(w, helloworld())
 	recordMetrics()
 }
 

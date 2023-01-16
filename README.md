@@ -81,3 +81,4 @@ grafana dashboard:
 ![prometheus targets](assets/images/img_2.png)
 ![prometheus dashboard](assets/images/img_3.png)
 ![grafana dashboard](assets/images/img_4.png)
+![github actions](assets/images/img_5.png)

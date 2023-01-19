@@ -32,6 +32,7 @@ push local image to Dockerhub registry
 * `docker push user/kubi-assignment:latest`
 
 ### Install Prometheus Operator to K8s
+* https://github.com/prometheus-operator/kube-prometheus
 install `kube-prometheus` operator and monitoring components:
 * `git clone git@github.com:prometheus-operator/kube-prometheus.git`
 
@@ -82,3 +83,18 @@ grafana dashboard:
 ![prometheus dashboard](assets/images/img_3.png)
 ![grafana dashboard](assets/images/img_4.png)
 ![github actions](assets/images/img_5.png)
+![github actions](assets/images/img_6.png)
+
+### Install ArgoCD
+https://argo-cd.readthedocs.io/en/stable/getting_started/
+
+apply manifests:
+* `kubectl create namespace argocd`
+* `kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml`
+
+port forward
+* `kubectl port-forward svc/argocd-server -n argocd 8080:443`
+
+get initial client admin secret
+* `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
+

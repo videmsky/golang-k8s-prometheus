@@ -111,13 +111,13 @@ login:
 
 install Remote Network Agent(RNA) in K8s cluster:
 * `armory agent create`
-NOTE: replace `<my-agent-identifier>` below with string you chose in this step
+- NOTE: replace `<my-agent-identifier>` below with string you chose in this step
 
 check that agent is up & running:
 * `kubectl get all -n armory-rna`
 
 kickoff deployment:
-* `armory deploy start -f https://go.armory.io/hello-armory-first-deployment --account <my-agent-identifier>`
+* `armory deploy start -f https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/feature-armory/deploy/deployment.yml --account <my-agent-identifier>`
 
 check staging namespace:
 * `kubectl get pods -n gkp-staging --watch`

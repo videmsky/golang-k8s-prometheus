@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"log"
-	"gkp/server"
+	"golang-k8s-prometheus/server"
 )
 
 func main() {

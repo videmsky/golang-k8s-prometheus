@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: gkp
-        image: videmsky/gkp:latest
+        image: videmsky/golang-k8s-prometheus:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: web

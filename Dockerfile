@@ -1,10 +1,13 @@
-FROM golang:alpine AS build
-RUN apk add git
-RUN mkdir /src
-ADD . /src
-WORKDIR /src
-RUN go build -o /tmp/http-server ./main.go
+FROM golang:1.16.4-buster AS builder
 
-FROM alpine:edge
-COPY --from=build /tmp/http-server /sbin/http-server
-CMD /sbin/http-server
+ARG VERSION=dev
+
+WORKDIR /go/src/app
+COPY main.go .
+RUN go build -o main -ldflags=-X=main.version=${VERSION} main.go
+
+FROM debian:buster-slim
+COPY --from=builder /go/src/app/main /go/bin/main
+ENV PATH="/go/bin:${PATH}"
+CMD ["main"]
+

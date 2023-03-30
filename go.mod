@@ -1,4 +1,4 @@
-module kubi-assignment
+module gkp
 
 go 1.19
 

@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"log"
-	"kubi-assignment/server"
+	"gkp/server"
 )
 
 func main() {

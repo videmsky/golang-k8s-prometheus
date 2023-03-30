@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: kubi-assignment
-  name: kubi-assignment
+    app: gkp
+  name: gkp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: kubi-assignment
+      app: gkp
   template:
     metadata:
       labels:
-        app: kubi-assignment
+        app: gkp
     spec:
       containers:
-      - name: kubi-assignment
-        image: videmsky/kubi-assignment:latest
+      - name: gkp
+        image: videmsky/gkp:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: web

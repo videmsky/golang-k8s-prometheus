@@ -6,7 +6,7 @@ Note: These steps are mostly my scratch and your mileage may vary on running the
 ### Run Go Client Locally
 
 configure dependencies:
-* `go mod init kubi-assignment`
+* `go mod init gkp`
 * `go get -u -v ./...`
 
 running the project:
@@ -22,14 +22,14 @@ building the project binary:
 
 ### Dockerize Go Client
 build & Tag container:
-* `docker build -t kubi-assignment .`
-* `docker tag kubi-assignment user/kubi-assignment:latest`
+* `docker build -t gkp .`
+* `docker tag gkp user/gkp:latest`
 
 login to Dockerhub:
 * `docker login`
 
 push local image to Dockerhub registry
-* `docker push user/kubi-assignment:latest`
+* `docker push user/gkp:latest`
 
 ### Install Prometheus Operator to K8s
 * https://github.com/prometheus-operator/kube-prometheus
@@ -51,22 +51,22 @@ kubectl wait \
 to delete `kube-prometheus`:
 * `kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup`
 
-### Deploy `kubi-assignment` to K8s
+### Deploy `gkp` to K8s
 
 create namespace:
-* `kubectl create namespace kubiya`
+* `kubectl create namespace gkp`
 
 create deployment:
-* `kubectl apply -f ./manifests --namespace=kubiya`
+* `kubectl apply -f ./manifests --namespace=gkp`
 
 delete deployment:
-* `kubectl delete -f ./manifests --namespace=kubiya`
+* `kubectl delete -f ./manifests --namespace=gkp`
 
 ### Access the UIs
 a few local `port-forwards` to view GUIs
 
-kubi-assignment:
-* `kubectl --namespace monitoring port-forward svc/kubi-assignment-service 8080`
+gkp application:
+* `kubectl --namespace monitoring port-forward svc/gkp-service 8080`
 * `localhost:8080`
 * `localhost:8080/metrics`
 
@@ -77,13 +77,6 @@ prometheus dashboard:
 grafana dashboard:
 * `kubectl --namespace monitoring port-forward svc/grafana 3000`
 * `localhost:3000`
-
-![hello world](assets/images/img_1.png)
-![prometheus targets](assets/images/img_2.png)
-![prometheus dashboard](assets/images/img_3.png)
-![grafana dashboard](assets/images/img_4.png)
-![github actions](assets/images/img_5.png)
-![github actions](assets/images/img_6.png)
 
 ### Install ArgoCD
 https://argo-cd.readthedocs.io/en/stable/getting_started/

@@ -30,7 +30,7 @@ func recordMetrics() {
 
 var (
 	opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
-		Name: "kubi_assignment_processed_ops_total",
+		Name: "gkp_processed_ops_total",
 		Help: "The total number of processed events",
 	})
 )
@@ -45,7 +45,7 @@ func (s HTTPServer) Open() error {
 }
 
 func helloworld() string {
-	return "Hello Kubiya!!!"
+	return "Hello GKP!!!"
 }
 
 func home(w http.ResponseWriter, r *http.Request) {

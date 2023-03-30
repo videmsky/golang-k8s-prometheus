@@ -20,6 +20,12 @@ testing the project:
 building the project binary:
 * `go build -o app`
 
+### Tag Commit to Trigger Actions Workflow
+create tag:
+* `newtag=v1.0.1; git tag $newtag && git push origin $newtag`
+delete tag:
+* `todel=v1.0.1; git tag -d $todel && git push origin :refs/tags/$todel`
+
 ### Dockerize Go Client
 build & Tag container:
 * `docker build -t gkp .`

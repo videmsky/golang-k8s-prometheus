@@ -117,7 +117,7 @@ check that agent is up & running:
 * `kubectl get all -n armory-rna`
 
 kickoff deployment:
-* `armory deploy start -f https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/feature-armory/deploy/deployment.yml --account <my-agent-identifier>`
+* `armory deploy start -f https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/deploy/deployment.yml --account <my-agent-identifier>`
 
 check staging namespace:
 * `kubectl get pods -n gkp-staging --watch`

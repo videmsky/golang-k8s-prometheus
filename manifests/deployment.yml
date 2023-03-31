@@ -5,7 +5,7 @@ metadata:
     app: gkp
   name: gkp
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: gkp
@@ -16,8 +16,10 @@ spec:
     spec:
       containers:
       - name: gkp
-        image: videmsky/gkp:latest
-        imagePullPolicy: IfNotPresent
+        image: index.docker.io/videmsky/golang-k8s-prometheus:latest
+        env:
+          - name: APPLICATION_NAME
+            value: gkp
         ports:
         - name: web
           containerPort: 8080

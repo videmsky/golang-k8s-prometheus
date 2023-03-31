@@ -1,0 +1,47 @@
+version: v1
+kind: kubernetes
+application: gkp
+targets:
+  staging:
+    account: my-cdaas-cluster
+    namespace: gkp-staging
+    strategy: rolling
+  prod:
+    account: my-cdaas-cluster
+    namespace: gkp-prod
+    strategy: trafficSplit
+    constraints:
+      dependsOn: ["staging"]
+      beforeDeployment:
+        - pause:
+            untilApproved: true
+manifests:
+  # This tutorial uses URLs to ensure a simple first-time deployment experience.
+  # You can also use relative file paths to define manifest locations.
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/deployment.yml
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/service.yml
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/staging-namespace.yml
+    targets: ["staging"]
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/prod-namespace.yml
+    targets: ["prod"]
+strategies:
+  rolling:
+    canary:
+      steps:
+        - setWeight:
+            weight: 100
+  trafficSplit:
+    canary:
+      steps:
+        - setWeight:
+            weight: 25
+        - exposeServices:
+            services:
+              - gkp-service
+            ttl:
+              duration: 30
+              unit: minutes
+        - pause:
+            untilApproved: true
+        - setWeight:
+            weight: 100

@@ -22,9 +22,10 @@ building the project binary:
 
 ### Tag Commit to Trigger Actions Workflow
 create tag:
-* `newtag=v1.0.1; git tag $newtag && git push origin $newtag`
+* `NEWTAG=v1.0.1; git tag $NEWTAG && git push origin $NEWTAG`
+
 delete tag:
-* `todel=v1.0.1; git tag -d $todel && git push origin :refs/tags/$todel`
+* `DELTAG=v1.0.1; git tag -d $DELTAG && git push origin :refs/tags/$DELTAG`
 
 ### Dockerize Go Client
 build & Tag container:
@@ -57,7 +58,7 @@ kubectl wait \
 to delete `kube-prometheus`:
 * `kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup`
 
-### Deploy `gkp` to K8s
+### Manually Deploy `gkp` to K8s
 
 create namespace:
 * `kubectl create namespace gkp`
@@ -72,7 +73,7 @@ delete deployment:
 a few local `port-forwards` to view GUIs
 
 gkp application:
-* `kubectl --namespace monitoring port-forward svc/gkp-service 8080`
+* `kubectl --namespace gkp port-forward svc/gkp-service 8080`
 * `localhost:8080`
 * `localhost:8080/metrics`
 
@@ -97,3 +98,29 @@ port forward
 get initial client admin secret
 * `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
 
+### Deploy to Armory CDaaS
+
+install `armory-cli` w/ homebrew:
+* `brew install armory-io/armory/armory-cli`
+
+check version:
+* `armory version`
+
+login:
+* `armory login`
+
+install Remote Network Agent(RNA) in K8s cluster:
+* `armory agent create`
+- NOTE: replace `<my-agent-identifier>` below with string you chose in this step
+
+check that agent is up & running:
+* `kubectl get all -n armory-rna`
+
+kickoff deployment:
+* `armory deploy start -f https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/deploy/deployment.yml --account <my-agent-identifier>`
+
+check staging namespace:
+* `kubectl get pods -n gkp-staging --watch`
+
+after manual approve... check prod namespace:
+* `kubectl get pods -n gkp-prod --watch`

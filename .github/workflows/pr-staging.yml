@@ -44,3 +44,24 @@ jobs:
             ${{env.LASTEST_TAG}}
           build-args: |
             ${{steps.version_step.outputs.version}}
+  
+  deploy-staging:
+    needs: publish-latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: deploy app
+        id: deploy
+        uses: armory/cli-deploy-action@main
+        with:
+          clientId: ${{ secrets.CDAAS_CLIENT_ID }}
+          clientSecret: ${{ secrets.CDAAS_CLIENT_SECRET }}
+          path-to-file: "/deploy/deployment.yml"
+          addContext: "environment=staging"
+          waitForDeployment: true
+
+      - name: print deploy output
+        id: output
+        run: echo -e 'DeploymentID ${{steps.deploy.outputs.DEPLOYMENT_ID}}\nLink ${{steps.deploy.outputs.LINK}}\n${{steps.deploy.outputs.RUN_RESULT}}'

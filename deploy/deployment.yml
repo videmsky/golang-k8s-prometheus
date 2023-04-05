@@ -3,11 +3,11 @@ kind: kubernetes
 application: gkp
 targets:
   staging:
-    account: my-cdaas-cluster
+    account: lotctl
     namespace: gkp-staging
     strategy: rolling
   prod:
-    account: my-cdaas-cluster
+    account: lotctl
     namespace: gkp-prod
     strategy: trafficSplit
     constraints:

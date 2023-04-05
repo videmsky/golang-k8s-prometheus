@@ -1,8 +1,8 @@
 name: publish-release-&-deploy-prod
 on:
-	push:
-		branches:
-			- 'main'
+  push:
+    branches:
+      - 'main'
 jobs:
   publish-release:
     runs-on: ubuntu-latest

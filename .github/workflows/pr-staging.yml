@@ -1,8 +1,8 @@
 name: publish-latest-&-deploy-staging
 on:
-	pull_request:
-		branches:
-			- 'main'
+  pull_request:
+    branches:
+      - 'main'
 jobs:
   publish-latest:
     runs-on: ubuntu-latest

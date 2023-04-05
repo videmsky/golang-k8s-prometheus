@@ -1,8 +1,9 @@
 name: publish-release-&-deploy-prod
 on:
   push:
-    branches:
-      - 'main'
+    tags:
+      - 'v*'
+
 jobs:
   publish-release:
     runs-on: ubuntu-latest

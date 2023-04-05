@@ -2,10 +2,9 @@ name: feature-branch-build-test-&-publish
 on:
   push:
     branches:
-      - 'feature-**'
+      - 'feature*'
 jobs:
   build-test:
-    if: startsWith(github.head_ref, 'feature-')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

@@ -2,10 +2,6 @@ version: v1
 kind: kubernetes
 application: gkp
 targets:
-  staging:
-    account: lotctl
-    namespace: gkp-staging
-    strategy: rolling
   prod:
     account: lotctl
     namespace: gkp-prod

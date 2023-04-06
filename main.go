@@ -1,23 +1,20 @@
 package main
 
 import (
-	"flag"
-	"log"
-	"gkp/server"
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/contrib/static"
 )
 
 func main() {
 
-	port := flag.String("port", "8080", "Port to listen to")
-	flag.Parse()
+	r := gin.Default()
 
-	listeningPort := ":" + *port
-	log.Println(listeningPort)
+	r.GET("/hello", func(c *gin.Context) {
+		c.String(200, "Hola, Mundo!!!")
+	})
 
-	httpServer := server.NewHTTPServer(listeningPort)
+	r.Use(static.Serve("/", static.LocalFile("./views", true)))
 
-	if err := httpServer.Open(); err != nil {
-		log.Fatal("could not open httpServer", err)
-	}
+	r.Run()
 
 }

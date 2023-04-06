@@ -15,6 +15,8 @@ targets:
         - pause:
             untilApproved: true
 manifests:
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/deployment.yml
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/service.yml
   - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/prod-namespace.yml
     targets: ["prod"]
 strategies:

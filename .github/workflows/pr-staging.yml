@@ -58,8 +58,8 @@ jobs:
         with:
           clientId: ${{ secrets.CDAAS_CLIENT_ID }}
           clientSecret: ${{ secrets.CDAAS_CLIENT_SECRET }}
-          path-to-file: "/deploy/deployment.yml"
-          addContext: "environment=staging"
+          path-to-file: "/deploy/deploy-staging.yml"
+          # addContext: "environment=staging"
           waitForDeployment: true
 
       - name: print deploy output

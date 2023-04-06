@@ -1,0 +1,19 @@
+version: v1
+kind: kubernetes
+application: gkp
+targets:
+  staging:
+    account: lotctl
+    namespace: gkp-staging
+    strategy: rolling
+manifests:
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/deployment.yml
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/service.yml
+  - path: https://raw.githubusercontent.com/videmsky/golang-k8s-prometheus/main/manifests/staging-namespace.yml
+    targets: ["staging"]
+strategies:
+  rolling:
+    canary:
+      steps:
+        - setWeight:
+            weight: 100

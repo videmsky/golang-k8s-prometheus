@@ -22,4 +22,4 @@ spec:
             value: gkp
         ports:
         - name: web
-          containerPort: 8080
+          containerPort: 8889

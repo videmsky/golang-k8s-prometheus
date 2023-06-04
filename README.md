@@ -11,8 +11,8 @@ configure dependencies:
 
 running the project:
 * `go run .`
-* http server listens on `localhost:8080`
-* metrics endpoint available `localhost:8080/metrics`
+* http server listens on `localhost:8889`
+* metrics endpoint available `localhost:8889/metrics`
 
 testing the project:
 * `go test -v -cover ./...`
@@ -73,9 +73,9 @@ delete deployment:
 a few local `port-forwards` to view GUIs
 
 gkp application:
-* `kubectl --namespace gkp port-forward svc/gkp-service 8080`
-* `localhost:8080`
-* `localhost:8080/metrics`
+* `kubectl --namespace gkp port-forward svc/gkp-service 8889`
+* `localhost:8889`
+* `localhost:8889/metrics`
 
 prometheus dashboard:
 * `kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090`
